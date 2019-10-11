@@ -1,0 +1,18 @@
+version: '3'
+services:
+  db:
+    build: ./mysql
+    restart: always
+    volumes:
+      - ./mysql/persistence:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: dev
+    ports:
+    - "3306"
+  server:
+    build: ./container
+    restart: always
+    volumes:
+      - ./container:/go-bin
+    ports:
+    - "7777:7777"
