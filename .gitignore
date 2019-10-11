@@ -1,0 +1,9 @@
+*.pb.go
+server/container/server
+/server/mysql/persistence/
+.idea/
+.idea/*
+/node_modules/
+node_modules/
+node_modules/**
+/node_modules/*
