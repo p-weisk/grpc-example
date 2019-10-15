@@ -1,6 +1,6 @@
 # Build
 
-protobuf compiler und go compiler/sdk werden benötigt
+protobuf compiler und go compiler/sdk sowie Docker werden benötigt
 * .proto datei im Ordner API mit protoc und Zielplattform Go kompilieren
 
 ## server
