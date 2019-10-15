@@ -2,7 +2,7 @@ package invoiceService
 
 import (
 	"database/sql"
-	"github.com/p-weisk/avg-grpc/api"
+	"github.com/p-weisk/grpc-example/api"
 	"golang.org/x/net/context"
 	"log"
 	"strconv"
