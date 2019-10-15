@@ -2,6 +2,12 @@
 
 protobuf compiler und go compiler/sdk sowie Docker werden benötigt
 * .proto datei im Ordner API mit protoc und Zielplattform Go kompilieren
+```
+protoc -I api/ \
+    -I${GOPATH}/src \
+    --go_out=plugins=grpc:api \
+    api/api.proto
+```
 
 ## server
 
