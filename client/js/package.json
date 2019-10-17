@@ -1,0 +1,7 @@
+{
+  "name": "grpc-example-client",
+  "version": "1.0.0",
+  "dependencies": {
+    "grpc": "*"
+  }
+}
