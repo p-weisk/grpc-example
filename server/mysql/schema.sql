@@ -4,14 +4,25 @@ CREATE DATABASE grpc CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
 CREATE TABLE grpc.product (
     Id varchar(255) PRIMARY KEY
 );
+CREATE TABLE grpc.client (
+    Id varchar(255) PRIMARY KEY
+)
 CREATE TABLE grpc.invoice (
     Number integer PRIMARY KEY,
     ClientId varchar(255) NOT NULL,
     P varchar(255) NOT NULL,
-    FOREIGN KEY Fk_P(P) REFERENCES grpc.product(Id) ON DELETE CASCADE
+    FOREIGN KEY Fk_P(P) REFERENCES grpc.product(Id) ON DELETE CASCADE,
+    FOREIGN KEY Fk_C(ClientId) REFERENCES grpc.client(Id) ON DELETE CASCADE
 );
 CREATE USER dev@'%' IDENTIFIED BY 'dev';
 GRANT ALL PRIVILEGES ON grpc.* TO dev@'%';
+
+INSERT INTO grpc.product(Id) VALUES ('Client-0000');
+INSERT INTO grpc.product(Id) VALUES ('Client-0001');
+INSERT INTO grpc.product(Id) VALUES ('Client-0002');
+INSERT INTO grpc.product(Id) VALUES ('Client-0003');
+INSERT INTO grpc.product(Id) VALUES ('Client-0004');
+INSERT INTO grpc.product(Id) VALUES ('Client-0005');
 
 INSERT INTO grpc.product(Id) VALUES ('Product-0000');
 INSERT INTO grpc.product(Id) VALUES ('Product-0001');

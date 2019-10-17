@@ -4,10 +4,12 @@ import (
 	"database/sql"
 	"github.com/p-weisk/grpc-example/api"
 	"golang.org/x/net/context"
+	"google.golang.org/grpc/status"
+	"google.golang.org/grpc/codes"
 	"log"
 )
 
-const SalesVolumeQuery = "SELECT COUNT(*) FROM grpc.invoice WHERE P = ?;"
+const SalesVolumeQuery = "SELECT Count(P) -1 + COUNT(Id) from (select Number, ClientId, P, null as Id from invoice where P=? UNION ALL select null, null, null, Id from product where Id=?) as t;"
 
 // gRPC server
 type Server struct {
@@ -17,20 +19,19 @@ type Server struct {
 // Handler for ProductService
 func (s *Server) GetVolumeOfSales(ctx context.Context, in *api.Product) (*api.SalesVolume, error) {
 	log.Printf("Receive message for ProductService (GetVolumeOfSales), arg: %+v", *in)
+	if in == nil || in.ProductId == "" {
+		return nil, status.Error(codes.InvalidArgument, "Product Id must not be null")
+	}
 
-	dbres, dberr := s.Database.Query(SalesVolumeQuery, in.ProductId)
+	var pr, res int
+	dberr := s.Database.QueryRow(SalesVolumeQuery, in.ProductId, in.ProductId).Scan(&res)
 	if dberr != nil {
-		return nil, dberr
+		return nil, status.Error(codes.Unknown, dberr.Error())
 	}
-	if !dbres.Next() {
-		return nil, nil
-	}
-
-	var res int
-
-	scerr := dbres.Scan(&res)
-	if scerr != nil {
-		return nil, scerr
+	if res < 0 {
+		return &api.SalesVolume{
+			Volume: 0,
+		}, status.Error(codes.NotFound, "UnknownProductException")
 	}
 
 	return &api.SalesVolume{
