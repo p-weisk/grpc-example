@@ -6,7 +6,7 @@ CREATE TABLE grpc.product (
 );
 CREATE TABLE grpc.client (
     Id varchar(255) PRIMARY KEY
-)
+);
 CREATE TABLE grpc.invoice (
     Number integer PRIMARY KEY,
     ClientId varchar(255) NOT NULL,
@@ -17,12 +17,14 @@ CREATE TABLE grpc.invoice (
 CREATE USER dev@'%' IDENTIFIED BY 'dev';
 GRANT ALL PRIVILEGES ON grpc.* TO dev@'%';
 
-INSERT INTO grpc.product(Id) VALUES ('Client-0000');
-INSERT INTO grpc.product(Id) VALUES ('Client-0001');
-INSERT INTO grpc.product(Id) VALUES ('Client-0002');
-INSERT INTO grpc.product(Id) VALUES ('Client-0003');
-INSERT INTO grpc.product(Id) VALUES ('Client-0004');
-INSERT INTO grpc.product(Id) VALUES ('Client-0005');
+
+
+INSERT INTO grpc.client(Id) VALUES ('Client-0000');
+INSERT INTO grpc.client(Id) VALUES ('Client-0001');
+INSERT INTO grpc.client(Id) VALUES ('Client-0002');
+INSERT INTO grpc.client(Id) VALUES ('Client-0003');
+INSERT INTO grpc.client(Id) VALUES ('Client-0004');
+INSERT INTO grpc.client(Id) VALUES ('Client-0005');
 
 INSERT INTO grpc.product(Id) VALUES ('Product-0000');
 INSERT INTO grpc.product(Id) VALUES ('Product-0001');

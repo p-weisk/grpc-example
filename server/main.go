@@ -12,7 +12,7 @@ import (
 	"net"
 )
 
-func main() {gr
+func main() {
 	// create database handler
 	db, dsnerr := sql.Open("mysql", "dev:dev@tcp(db:3306)/grpc")
 	if dsnerr != nil {

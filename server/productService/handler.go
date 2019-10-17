@@ -23,7 +23,7 @@ func (s *Server) GetVolumeOfSales(ctx context.Context, in *api.Product) (*api.Sa
 		return nil, status.Error(codes.InvalidArgument, "Product Id must not be null")
 	}
 
-	var pr, res int
+	var res int
 	dberr := s.Database.QueryRow(SalesVolumeQuery, in.ProductId, in.ProductId).Scan(&res)
 	if dberr != nil {
 		return nil, status.Error(codes.Unknown, dberr.Error())
