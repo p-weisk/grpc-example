@@ -1,8 +1,9 @@
 const client = require('./client');
-client.findInvoiceById({number: "2"}, (error, inv) => {
+
+client.invoiceClient.createInvoice({ number: "2" }, (error, inv) => {
     if (!error) {
         console.log('successfully fetch List notes');
-        console.log(inv);
+        console.log("Response: ", inv);
     } else {
         console.error(error);
     }
